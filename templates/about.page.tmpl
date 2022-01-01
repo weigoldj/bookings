@@ -1,0 +1,21 @@
+{{ template "base" . }}
+
+{{ define "content" }}
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>About</h1>      
+    <p>Some text that represents "Me"...</p>
+    <p>{{ index .StringMap "test"}}</p>
+
+    <p>
+      another line
+      {{ if ne (index .StringMap "remote_ip") "" }}
+        Your remote IP address is {{ index .StringMap "remote_ip" }}
+      {{ else }}
+        I dont know you address yet.  Visit the <a href="/">Home Page</a> so it can be set
+      {{ end }}
+    </p>
+    
+  </div>
+</div>
+{{ end }}  
