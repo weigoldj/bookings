@@ -1,0 +1,8 @@
+.DS_Store
+*.a
+*.so
+*.vscode
+
+
+# files
+database.yml
