@@ -22,12 +22,40 @@ Database
 Soda is part of buffalo but you can download and set path to use it.  Soda uses Fizz a DSL to migrate databases.  
 
 ```
-# create migration
-> soda create
+# create fizz migration
+> soda generate fizz <migration name>
+'''
+create_table("users") {
+  t.Column("id", "integer", {primary: true})
+  t.Column("first_name", "string", { "default": "" })
+  t.Column("last_name", "string", { "default": "" })
+  t.Column("email", "string", {})
+  t.Column("password", "string", {"size": 60})
+  t.Column("access_level", "integer", {"default": 1})
+}
+'''
+# create indexes
+soda generate fizz CreateUniqueInexOnTable 
+'''
+add_index("users", "email", {"unique": true })
 
+drop_index("users", "users_email_idx")
+'''
+
+
+### Generate Index from one tabe to another 
+```
+add_foreign_key( "from_table", "from_table_id", {"to_table": ["id"]})
+    "on_delete": "cascade"
+    "on_update": "cascade"
+})
+
+drop_)foreignt_key("from_table", "from_table_to_table_id_fx, {} )
+```
 # run migration
 > soda migrate 
-
+> soda migrate down
+> soda reset  # will run all all down migrations, then run all migrations.
 # help
 > soda help
 ```
